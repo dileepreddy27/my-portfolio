@@ -4,7 +4,7 @@ import { useState, useEffect, useRef } from "react";
    DATA  —  Replace all of this with YOUR own information
 ═══════════════════════════════════════════════════════ */
 const DATA = {
-  name: "Brittany Chiang",
+  name: "Dileep Reddy Battu",
   title: "Frontend Engineer",
   tagline: "I build accessible, pixel-perfect digital experiences for the web.",
 
