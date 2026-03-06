@@ -1,3 +1,4 @@
+import EasterEgg from "./EasterEgg";
 import { useState, useEffect, useRef } from "react";
 
 /* ═══════════════════════════════════════════════════════
@@ -678,6 +679,7 @@ function FormInput({ label, type = "text", value, onChange, S }) {
           padding: "11px 14px", fontSize: 14, color: S.textPri,
           fontFamily: S.sans, outline: "none", transition: "border-color 200ms",
           boxSizing: "border-box" }} />
+        <EasterEgg /> 
     </div>
   );
 }
