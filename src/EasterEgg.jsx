@@ -72,20 +72,20 @@ export default function EasterEgg() {
             width: "min(700px, 92vw)", aspectRatio: "1",
             borderRadius: "50%", overflow: "hidden",
             boxShadow: [
-              "0 0 0 1px rgba(255,255,255,0.06)",
-              "0 0 60px 10px rgba(236,72,153,0.35)",
-              "0 0 120px 30px rgba(99,102,241,0.25)",
-              "0 0 200px 60px rgba(6,182,212,0.15)",
+              "0 0 0 1px rgba(255,255,255,0.18)",
+              "0 0 60px 10px rgba(120,220,180,0.30)",
+              "0 0 120px 30px rgba(255,150,200,0.20)",
+              "0 0 200px 60px rgba(140,180,255,0.14)",
             ].join(","),
           }}>
             {/* Full-sphere canvas */}
             <canvas ref={canvasRef} width={700} height={700}
               style={{ position: "absolute", inset: 0, width: "100%", height: "100%" }} />
 
-            {/* Dark center mask so text is readable */}
+            {/* Soft center overlay so text is readable */}
             <div style={{
               position: "absolute", inset: 0,
-              background: "radial-gradient(circle at 50% 50%, rgba(3,6,18,0.78) 28%, rgba(3,6,18,0.45) 52%, transparent 72%)",
+              background: "radial-gradient(circle at 50% 50%, rgba(255,255,255,0.18) 20%, rgba(255,255,255,0.06) 50%, transparent 70%)",
               pointerEvents: "none",
             }} />
 
@@ -99,13 +99,13 @@ export default function EasterEgg() {
             }}>
               <p style={{
                 fontFamily: "'Fira Code',monospace", fontSize: "clamp(9px,1.3vw,11px)",
-                color: "#64ffda", letterSpacing: "0.2em", textTransform: "uppercase", marginBottom: 4,
+                color: "#0d9488", letterSpacing: "0.2em", textTransform: "uppercase", marginBottom: 4,
               }}>
                 Click to time travel
               </p>
               <h3 style={{
                 fontFamily: "'Raleway',sans-serif", fontSize: "clamp(14px,2.2vw,20px)",
-                fontWeight: 700, color: "#f8fafc", fontStyle: "italic",
+                fontWeight: 700, color: "#1e293b", fontStyle: "italic",
                 lineHeight: 1.35, textAlign: "center", marginBottom: 10,
               }}>
                 Looking for a different site?<br />Go back in time...
@@ -142,8 +142,8 @@ export default function EasterEgg() {
 }
 
 /* ═══════════════════════════════════════════════════
-   Aurora painter — bright Siri-style liquid waves
-   Uses layered sine-wave ribbons at full brightness
+   Aurora painter — bright pastel orbital waves
+   Bright white center + soft rotating rim bands
 ═══════════════════════════════════════════════════ */
 function paintAurora(canvas, frame) {
   const ctx = canvas.getContext("2d");
@@ -158,112 +158,65 @@ function paintAurora(canvas, frame) {
   ctx.arc(cx, cy, R, 0, Math.PI * 2);
   ctx.clip();
 
-  /* 1 ── Deep dark base */
-  ctx.fillStyle = "#04071a";
+  /* 1 ── Bright white/cream radial base */
+  const base = ctx.createRadialGradient(cx, cy, 0, cx, cy, R);
+  base.addColorStop(0,    "rgba(255,255,255,1)");
+  base.addColorStop(0.30, "rgba(252,253,255,0.97)");
+  base.addColorStop(0.60, "rgba(235,240,250,0.88)");
+  base.addColorStop(1,    "rgba(210,218,235,0.75)");
+  ctx.fillStyle = base;
   ctx.fillRect(0, 0, W, H);
 
-  /* 2 ── Big bright orbital blobs */
-  const orbs = [
-    { spd: 0.7,  phase: 0,   ox: 0.30, oy: 0.28, r: 0.58, rgb: "255,20,150",   a: 0.9  }, // hot pink
-    { spd: 0.5,  phase: 2.1, ox: 0.35, oy: 0.30, r: 0.52, rgb: "120,60,255",   a: 0.85 }, // violet
-    { spd: 0.6,  phase: 4.2, ox: 0.28, oy: 0.32, r: 0.50, rgb: "0,200,255",    a: 0.80 }, // cyan
-    { spd: 0.45, phase: 1.0, ox: 0.25, oy: 0.25, r: 0.45, rgb: "80,200,120",   a: 0.70 }, // green
-    { spd: 0.55, phase: 3.3, ox: 0.20, oy: 0.22, r: 0.42, rgb: "255,160,20",   a: 0.65 }, // amber
-    { spd: 0.65, phase: 5.1, ox: 0.22, oy: 0.20, r: 0.40, rgb: "255,80,200",   a: 0.70 }, // magenta
+  /* 2 ── Soft pastel orbital bands rotating around the rim */
+  const bands = [
+    { spd: 0.30, phase: 0,                    rgb: "100,210,170", a: 0.52 }, // soft green/teal
+    { spd: 0.25, phase: Math.PI * 0.65,        rgb: "255,140,195", a: 0.48 }, // soft pink/magenta
+    { spd: 0.35, phase: Math.PI * 1.25,        rgb: "130,175,255", a: 0.48 }, // soft blue
+    { spd: 0.20, phase: Math.PI * 1.80,        rgb: "255,215,140", a: 0.44 }, // soft yellow/cream
+    { spd: 0.28, phase: Math.PI * 0.40,        rgb: "175,148,255", a: 0.38 }, // soft lavender
+    { spd: 0.38, phase: Math.PI * 1.10,        rgb: "140,230,220", a: 0.42 }, // soft cyan/mint
   ];
 
-  orbs.forEach(({ spd, phase, ox, oy, r, rgb, a }) => {
-    const bx = cx + Math.sin(t * spd + phase) * R * ox;
-    const by = cy + Math.cos(t * spd * 0.8 + phase) * R * oy;
-    const br = R * r;
-    const g  = ctx.createRadialGradient(bx, by, 0, bx, by, br);
-    g.addColorStop(0,    `rgba(${rgb},${a})`);
-    g.addColorStop(0.45, `rgba(${rgb},${(a * 0.5).toFixed(2)})`);
-    g.addColorStop(1,    `rgba(${rgb},0)`);
-    ctx.fillStyle = g;
-    ctx.fillRect(0, 0, W, H);
-  });
+  const BLOBS_PER_BAND = 6;
 
-  /* 3 ── Bright sine-wave ribbons */
-  const ribbons = [
-    { t_mul: 1.2, phase: 0,   rgb: "255,20,150",  alpha: 0.55, thick: 0.22, yBase: 0.42 },
-    { t_mul: 0.9, phase: 1.8, rgb: "80,120,255",  alpha: 0.50, thick: 0.20, yBase: 0.50 },
-    { t_mul: 1.4, phase: 3.5, rgb: "0,220,255",   alpha: 0.48, thick: 0.18, yBase: 0.58 },
-    { t_mul: 0.8, phase: 5.2, rgb: "200,80,255",  alpha: 0.52, thick: 0.19, yBase: 0.35 },
-    { t_mul: 1.1, phase: 2.7, rgb: "255,180,0",   alpha: 0.40, thick: 0.16, yBase: 0.66 },
-  ];
+  bands.forEach(({ spd, phase, rgb, a }) => {
+    for (let b = 0; b < BLOBS_PER_BAND; b++) {
+      const bPhase = phase + (b / BLOBS_PER_BAND) * Math.PI * 2;
+      // Orbital angle advances with time; sine adds gentle undulation
+      const angle = t * spd + bPhase + Math.sin(t * spd * 0.7 + bPhase) * 0.28;
+      // Blob center hugs the rim with slight radial undulation
+      const rFrac = 0.82 + Math.sin(t * spd * 1.3 + bPhase * 1.4) * 0.07;
+      const bx = cx + Math.cos(angle) * R * rFrac;
+      const by = cy + Math.sin(angle) * R * rFrac;
+      // Blob radius varies slightly per blob
+      const blobR = R * (0.32 + Math.sin(t * spd * 0.9 + bPhase) * 0.04);
 
-  ribbons.forEach(({ t_mul, phase, rgb, alpha, thick, yBase }) => {
-    const points = [];
-    const STEPS  = 120;
-    for (let i = 0; i <= STEPS; i++) {
-      const nx = i / STEPS;
-      const wave =
-        Math.sin(nx * Math.PI * 3.5 + t * t_mul + phase) * 0.14 +
-        Math.sin(nx * Math.PI * 6   + t * t_mul * 1.6 + phase * 1.3) * 0.07 +
-        Math.sin(nx * Math.PI * 1.8 + t * t_mul * 0.7 + phase * 0.7) * 0.05;
-      points.push({ x: nx * W, y: H * (yBase + wave) });
+      const g = ctx.createRadialGradient(bx, by, 0, bx, by, blobR);
+      g.addColorStop(0,    `rgba(${rgb},${a})`);
+      g.addColorStop(0.45, `rgba(${rgb},${(a * 0.45).toFixed(2)})`);
+      g.addColorStop(1,    `rgba(${rgb},0)`);
+      ctx.fillStyle = g;
+      ctx.fillRect(0, 0, W, H);
     }
-
-    const ribbonH = H * thick;
-
-    // Top fill
-    ctx.beginPath();
-    ctx.moveTo(points[0].x, points[0].y);
-    points.forEach((p) => ctx.lineTo(p.x, p.y));
-    ctx.lineTo(W, 0);
-    ctx.lineTo(0, 0);
-    ctx.closePath();
-    const topG = ctx.createLinearGradient(0, 0, 0, H);
-    topG.addColorStop(0,   `rgba(${rgb},0)`);
-    topG.addColorStop(0.7, `rgba(${rgb},${(alpha * 0.3).toFixed(2)})`);
-    topG.addColorStop(1,   `rgba(${rgb},${alpha})`);
-    ctx.fillStyle = topG;
-    ctx.fill();
-
-    // Bottom fill
-    ctx.beginPath();
-    ctx.moveTo(points[0].x, points[0].y);
-    points.forEach((p) => ctx.lineTo(p.x, p.y));
-    ctx.lineTo(W, H);
-    ctx.lineTo(0, H);
-    ctx.closePath();
-    const botG = ctx.createLinearGradient(0, 0, 0, H);
-    botG.addColorStop(0,   `rgba(${rgb},${alpha})`);
-    botG.addColorStop(0.4, `rgba(${rgb},${(alpha * 0.4).toFixed(2)})`);
-    botG.addColorStop(1,   `rgba(${rgb},0)`);
-    ctx.fillStyle = botG;
-    ctx.fill();
-
-    // Bright glowing centerline
-    ctx.beginPath();
-    ctx.moveTo(points[0].x, points[0].y);
-    points.forEach((p) => ctx.lineTo(p.x, p.y));
-    ctx.strokeStyle = `rgba(${rgb},${Math.min(alpha * 1.8, 1).toFixed(2)})`;
-    ctx.lineWidth   = 2.5;
-    ctx.shadowColor = `rgba(${rgb},0.9)`;
-    ctx.shadowBlur  = 18;
-    ctx.stroke();
-    ctx.shadowBlur = 0;
   });
 
-  /* 4 ── Edge darkening */
-  const edge = ctx.createRadialGradient(cx, cy, R * 0.38, cx, cy, R);
-  edge.addColorStop(0,   "rgba(0,0,0,0)");
-  edge.addColorStop(0.6, "rgba(0,0,0,0.05)");
-  edge.addColorStop(0.85,"rgba(0,0,0,0.45)");
-  edge.addColorStop(1,   "rgba(0,0,0,0.80)");
+  /* 3 ── Subtle edge darkening vignette */
+  const edge = ctx.createRadialGradient(cx, cy, R * 0.62, cx, cy, R);
+  edge.addColorStop(0,    "rgba(10,15,35,0)");
+  edge.addColorStop(0.65, "rgba(10,15,35,0.10)");
+  edge.addColorStop(0.88, "rgba(10,15,35,0.38)");
+  edge.addColorStop(1,    "rgba(10,15,35,0.62)");
   ctx.fillStyle = edge;
   ctx.fillRect(0, 0, W, H);
 
-  /* 5 ── Bright center shimmer */
-  const sx = cx + Math.sin(t * 0.5) * R * 0.08;
-  const sy = cy + Math.cos(t * 0.4) * R * 0.06;
-  const shimmer = ctx.createRadialGradient(sx, sy, 0, sx, sy, R * 0.5);
-  shimmer.addColorStop(0,   "rgba(255,255,255,0.32)");
-  shimmer.addColorStop(0.25,"rgba(220,200,255,0.14)");
-  shimmer.addColorStop(0.6, "rgba(100,150,255,0.05)");
-  shimmer.addColorStop(1,   "rgba(0,0,0,0)");
+  /* 4 ── Luminous white center glow */
+  const sx = cx + Math.sin(t * 0.4) * R * 0.06;
+  const sy = cy + Math.cos(t * 0.3) * R * 0.05;
+  const shimmer = ctx.createRadialGradient(sx, sy, 0, sx, sy, R * 0.40);
+  shimmer.addColorStop(0,    "rgba(255,255,255,0.72)");
+  shimmer.addColorStop(0.35, "rgba(255,255,255,0.30)");
+  shimmer.addColorStop(0.70, "rgba(255,255,255,0.08)");
+  shimmer.addColorStop(1,    "rgba(255,255,255,0)");
   ctx.fillStyle = shimmer;
   ctx.fillRect(0, 0, W, H);
 
