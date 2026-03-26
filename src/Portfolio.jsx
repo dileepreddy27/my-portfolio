@@ -5,178 +5,155 @@ import { useState, useEffect, useRef } from "react";
 ═══════════════════════════════════════════════════════ */
 const DATA = {
   name: "Dileep Reddy Battu",
-  title: "Frontend Engineer",
-  tagline: "I build accessible, pixel-perfect digital experiences for the web.",
+  title: "Software Engineer",
+  tagline: "I build scalable web applications and backend systems with a focus on performance, reliability, and clean code.",
+  photo: "https://github.com/user-attachments/assets/a8d46040-9416-4039-90f7-dd67c9a07ba0",
 
   about: [
-    "I'm a frontend engineer with a specialty in web accessibility, focused on building pixel-perfect, intuitive user interfaces. I enjoy working at the intersection of design and engineering, where great user experience meets robust, clean, and scalable code.",
-    "Currently, I'm a senior frontend engineer at Klaviyo, where I work on the component library team to help maintain and evolve our design system. In this role, I lead accessibility efforts across components, tooling, and patterns, partnering closely with designers and engineers.",
-    "Previously, I've worked across a wide range of environments — from product studios to startups and large tech companies, including Apple, Starry Internet, and Upstatement. Outside of work, you can usually find me climbing, playing tennis, or running around Hyrule searching for Korok seeds.",
+    "Software Engineer with 3+ years of experience building scalable web applications and backend systems for enterprise and healthcare domains. Strong expertise in Python, JavaScript, and full-stack development, with hands-on experience in Unix/Linux environments, API integrations, and Agile development.",
+    "Proficient in cloud platforms (GCP, AWS), workflow automation, and full SDLC, with a focus on system performance, reliability, and scalability. Skilled in designing, developing, testing, and maintaining robust and efficient software solutions.",
+    "I hold a Master's in Computer Science from Northern Arizona University (CGPA 3.5). I'm passionate about solving complex problems and delivering impactful software that makes a difference.",
   ],
 
   skills: [
-    "JavaScript", "TypeScript", "React", "Next.js",
-    "Node.js", "HTML & CSS", "SCSS", "Storybook",
-    "WordPress", "Contentful", "React Native", "Accessibility (a11y)",
+    "Python", "JavaScript", "TypeScript", "React.js",
+    "Next.js", "Node.js", "Express.js", "Flask",
+    "FastAPI", "PostgreSQL", "MongoDB", "Docker",
+    "GCP", "AWS", "HTML & CSS", "Tailwind CSS",
+    "REST APIs", "Git", "Supabase", "n8n",
   ],
 
   experience: [
     {
-      period: "2024 — Present",
-      role: "Senior Frontend Engineer, Accessibility",
-      company: "Klaviyo",
-      companyUrl: "https://www.klaviyo.com",
+      period: "Aug 2024 — May 2025",
+      role: "Software Engineer",
+      company: "Vesta Teleradiology",
+      companyUrl: "#",
       description:
-        "Build and maintain critical components used to construct Klaviyo's frontend, across the whole product. Work closely with cross-functional teams, including developers, designers, and product managers, to implement and advocate for best practices in web accessibility.",
-      tech: ["JavaScript", "TypeScript", "React", "Storybook"],
+        "Developed backend services using Python and Node.js for healthcare workflows. Designed and implemented REST APIs for system integration. Built reliable workflows with validation, logging, and error handling. Automated reporting and operational processes. Collaborated on production-ready features.",
+      tech: ["Python", "Node.js", "REST APIs", "Healthcare"],
     },
     {
-      period: "2018 — 2024",
-      role: "Lead Engineer",
-      company: "Upstatement",
-      companyUrl: "https://upstatement.com",
+      period: "Aug 2024 — May 2025",
+      role: "Software Engineering Intern",
+      company: "Vesta Teleradiology",
+      companyUrl: "#",
       description:
-        "Built, styled, and shipped high-quality websites, design systems, mobile apps, and digital experiences for a diverse array of clients including Harvard Business School, Everytown for Gun Safety, Pratt Institute, and more. Provided leadership within engineering through knowledge shares and internal tooling.",
-      tech: ["JavaScript", "TypeScript", "React", "Next.js", "Node.js", "WordPress"],
+        "Developed backend components and API integrations. Improved application performance through debugging and optimization. Assisted in deployment pipelines and system monitoring.",
+      tech: ["Python", "Node.js", "API Integration", "CI/CD"],
     },
     {
-      period: "Jul — Dec 2017",
-      role: "UI Engineer Co-op",
-      company: "Apple",
-      companyUrl: "https://www.apple.com/apple-music/",
+      period: "Aug 2023 — May 2024",
+      role: "Teaching Assistant (Computer Science)",
+      company: "Northern Arizona University",
+      companyUrl: "https://nau.edu",
       description:
-        "Developed and styled interactive web apps for Apple Music, including the user interface of Apple Music's embeddable web player widget for in-browser user authorization and full song playback.",
-      tech: ["JavaScript", "Ember", "SCSS", "MusicKit.js"],
+        "Assisted students in programming and software engineering concepts. Conducted lab sessions and supported projects. Improved problem-solving skills through hands-on guidance.",
+      tech: ["Python", "Java", "C++", "Data Structures"],
     },
     {
-      period: "2016 — 2017",
-      role: "Developer",
-      company: "Scout Studio",
-      companyUrl: "https://scout.camd.northeastern.edu/",
+      period: "2020 — 2022",
+      role: "Software Engineer",
+      company: "Calibridge Info Systems Pvt. Ltd",
+      companyUrl: "#",
       description:
-        "Collaborated with student designers and engineers on pro-bono projects to create new brands, design systems, and websites for organizations in the community.",
-      tech: ["Jekyll", "SCSS", "JavaScript", "WordPress"],
-    },
-    {
-      period: "Jul — Dec 2016",
-      role: "Software Engineer Co-op",
-      company: "Starry",
-      companyUrl: "https://starry.com/",
-      description:
-        "Worked with the UI team to engineer and improve major features of Starry's customer-facing Android app.",
-      tech: ["Cordova", "Backbone", "JavaScript", "CSS"],
+        "Developed full-stack applications using React.js, Node.js, MongoDB. Designed RESTful APIs for scalable backend systems. Built responsive UI components. Improved application performance through optimization. Integrated third-party APIs and supported deployments.",
+      tech: ["React.js", "Node.js", "MongoDB", "REST APIs"],
     },
   ],
 
   projects: [
     {
-      title: "Build a Spotify Connected App",
+      title: "RadMapping+ (Radiology Management Platform)",
       description:
-        "Video course that teaches how to build a web app with the Spotify Web API. Topics covered include REST APIs, user auth flows, Node, Express, React, Styled Components, and more.",
-      tech: ["React", "Node.js", "Express", "Spotify API"],
-      github: "https://github.com/bchiang7",
-      live: "https://www.newline.co/courses/build-a-spotify-connected-app",
+        "Developed a radiology workflow and KPI platform using n8n, JavaScript, Flask, and PostgreSQL. Supported operations for 300+ doctors and 1200+ healthcare facilities. Reduced workflow processing time by 37% through automation. Ensured HIPAA compliance with secure data handling and SHA-256 encryption. Built backend systems using Supabase and Python, improving data retrieval latency by 70%.",
+      tech: ["n8n", "JavaScript", "Flask", "PostgreSQL", "Supabase", "Python"],
+      github: "https://github.com/dileepreddy27",
+      live: "",
       featured: true,
     },
     {
-      title: "Spotify Profile",
+      title: "CredMapping+ (Credentialing & KPI Platform)",
       description:
-        "Web app for visualizing personalized Spotify data. View your top artists, top tracks, recently played tracks, and detailed audio information. Create and save new playlists based on your existing ones.",
-      tech: ["React", "Express", "Spotify API", "Heroku"],
-      github: "https://github.com/bchiang7",
-      live: "https://spotify-profile.herokuapp.com/",
+        "Developed a credentialing workflow system using n8n, JavaScript, Flask, and PostgreSQL. Automated processes, reducing manual effort by 40%. Supported operations for 300+ healthcare providers and 1200+ facilities. Built scalable backend systems using Supabase and Python.",
+      tech: ["n8n", "JavaScript", "Flask", "PostgreSQL", "Supabase"],
+      github: "https://github.com/dileepreddy27",
+      live: "",
       featured: true,
     },
     {
-      title: "Halcyon Theme",
+      title: "SmartLeads (CRM Platform)",
       description:
-        "Minimal dark blue theme for VS Code, Sublime Text, Atom, iTerm, and more. Has 100k+ installs on the VS Code marketplace.",
-      tech: ["VS Code", "Sublime Text", "iTerm2", "Atom"],
-      github: "https://github.com/bchiang7",
-      live: "https://halcyon-theme.netlify.app/",
-      featured: false,
+        "Developed CRM using Next.js, TypeScript, Node.js, PostgreSQL. Implemented lead tracking and analytics dashboards. Designed API-driven architecture with real-time updates. Integrated Highcharts for visualization.",
+      tech: ["Next.js", "TypeScript", "Node.js", "PostgreSQL", "Highcharts"],
+      github: "https://github.com/dileepreddy27",
+      live: "",
+      featured: true,
     },
     {
-      title: "brittanychiang.com v4",
+      title: "SLKW E-Commerce Platform",
       description:
-        "An older iteration of this portfolio site built with Gatsby. Has accumulated 6k+ GitHub stars and 3k+ forks.",
-      tech: ["Gatsby", "Styled Components", "Netlify"],
-      github: "https://github.com/bchiang7",
-      live: "https://v4.brittanychiang.com/",
+        "Developed application using React.js and Tailwind CSS. Built backend using Node.js, Express.js, PostgreSQL. Implemented authentication, cart, and filtering features. Improved customer engagement by 30%.",
+      tech: ["React.js", "Tailwind CSS", "Node.js", "Express.js", "PostgreSQL"],
+      github: "https://github.com/dileepreddy27",
+      live: "",
       featured: false,
-    },
-  ],
-
-  blog: [
-    {
-      year: "2026",
-      title: "Welcome to the AI Parade",
-      url: "https://medium.com/@bchiang7/welcome-to-the-ai-parade-765f79b00c30",
-      description: "Thoughts on the rapid shift in how we build software in the age of AI tools and what it means for engineers.",
-      tag: "Opinion",
-    },
-    {
-      year: "2024",
-      title: "5 Common Accessibility Pitfalls and How to Avoid Them",
-      url: "https://klaviyo.tech/5-common-accessibility-pitfalls-and-how-to-avoid-them-e316dfc55ff0",
-      description: "A practical guide to the most frequent a11y mistakes in modern web apps and actionable ways to fix them.",
-      tag: "Accessibility",
-    },
-    {
-      year: "2020",
-      title: "Integrating Algolia Search with WordPress Multisite",
-      url: "https://medium.com/stories-from-upstatement/integrating-algolia-search-with-wordpress-multisite-e2dea3ed449c",
-      description: "Step-by-step walkthrough of setting up Algolia-powered search across a complex WordPress multisite network.",
-      tag: "Tutorial",
-    },
-    {
-      year: "2019",
-      title: "Building a Headless Mobile App CMS From Scratch",
-      url: "https://medium.com/stories-from-upstatement/building-a-headless-mobile-app-cms-from-scratch-bab2d17744d9",
-      description: "How we designed and built a fully custom headless CMS to power a React Native mobile application.",
-      tag: "Engineering",
     },
   ],
 
   certifications: [
     {
-      title: "AWS Certified Developer – Associate",
-      issuer: "Amazon Web Services",
-      year: "2024",
+      title: "Python",
+      issuer: "Certification",
+      year: "",
       url: "#",
-      badge: "AWS",
+      badge: "PY",
     },
     {
-      title: "Meta Frontend Developer Certificate",
-      issuer: "Meta / Coursera",
-      year: "2023",
+      title: "SQL",
+      issuer: "Certification",
+      year: "",
       url: "#",
-      badge: "META",
+      badge: "SQL",
     },
     {
-      title: "Google UX Design Certificate",
-      issuer: "Google / Coursera",
-      year: "2022",
+      title: "Generative AI",
+      issuer: "Certification",
+      year: "",
       url: "#",
-      badge: "GGL",
+      badge: "AI",
     },
     {
-      title: "TypeScript for Professionals",
-      issuer: "Udemy",
-      year: "2023",
+      title: "JavaScript",
+      issuer: "Certification",
+      year: "",
       url: "#",
-      badge: "TS",
+      badge: "JS",
+    },
+    {
+      title: "Artificial Intelligence",
+      issuer: "Certification",
+      year: "",
+      url: "#",
+      badge: "AI",
+    },
+    {
+      title: "Cloud Essentials",
+      issuer: "Certification",
+      year: "",
+      url: "#",
+      badge: "CLD",
     },
   ],
 
   social: {
-    github: "https://github.com/bchiang7",
-    linkedin: "https://www.linkedin.com/in/bchiang7/",
-    email: "your@email.com",
+    github: "https://github.com/dileepreddy27",
+    linkedin: "https://www.linkedin.com/in/dileep-reddy-b-08491a219",
+    email: "dileep151015@gmail.com",
   },
 };
 
-const NAV = ["About", "Experience", "Projects", "Blog", "Certifications", "Contact"];
+const NAV = ["About", "Experience", "Projects", "Certifications", "Contact"];
 
 /* ══════════════  ICONS  ══════════════ */
 const GithubIcon = ({ size = 20 }) => (
@@ -275,7 +252,7 @@ export default function Portfolio() {
       {/* ── Mobile nav ── */}
       <header className="lg:hidden fixed inset-x-0 top-0 z-50 flex justify-between items-center px-6 py-4"
         style={{ background: "rgba(10,25,47,0.93)", backdropFilter: "blur(12px)", borderBottom: `1px solid ${S.border}` }}>
-        <span style={{ fontFamily: S.mono, fontSize: 13, color: S.accent, letterSpacing: "0.2em" }}>BC.</span>
+        <span style={{ fontFamily: S.mono, fontSize: 13, color: S.accent, letterSpacing: "0.2em" }}>DB.</span>
         <button onClick={() => setMenuOpen(!menuOpen)} style={{ color: S.textPri, background: "none", border: "none", cursor: "pointer" }}>
           <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
             {menuOpen
@@ -303,6 +280,11 @@ export default function Portfolio() {
         {/* ════  SIDEBAR  ════ */}
         <aside className="hidden lg:flex lg:flex-col lg:justify-between lg:sticky lg:top-0 lg:h-screen lg:w-[42%] lg:shrink-0 lg:py-24">
           <div>
+            {DATA.photo && (
+              <img src={DATA.photo} alt={DATA.name}
+                style={{ width: 100, height: 100, borderRadius: "50%", objectFit: "cover",
+                  border: "2px solid rgba(100,255,218,0.3)", marginBottom: 20 }} />
+            )}
             <h1 style={{ fontFamily: S.sans, fontSize: "clamp(2.2rem,3.5vw,3rem)", fontWeight: 700,
               color: S.textPri, lineHeight: 1.1, letterSpacing: "-0.02em", marginBottom: 12 }}>
               {DATA.name}
@@ -412,17 +394,9 @@ export default function Portfolio() {
             </div>
           </section>
 
-          {/* BLOG */}
-          <section id="blog" ref={(el) => (refs.current["blog"] = el)}>
-            <MobileHeading num="04">Blog</MobileHeading>
-            <div style={{ display: "flex", flexDirection: "column", gap: 4 }}>
-              {DATA.blog.map((post, i) => <BlogCard key={i} post={post} S={S} />)}
-            </div>
-          </section>
-
           {/* CERTIFICATIONS */}
           <section id="certifications" ref={(el) => (refs.current["certifications"] = el)}>
-            <MobileHeading num="05">Certifications</MobileHeading>
+            <MobileHeading num="04">Certifications</MobileHeading>
             <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fill,minmax(220px,1fr))", gap: 12 }}>
               {DATA.certifications.map((cert, i) => <CertCard key={i} cert={cert} S={S} />)}
             </div>
@@ -430,7 +404,7 @@ export default function Portfolio() {
 
           {/* CONTACT */}
           <section id="contact" ref={(el) => (refs.current["contact"] = el)}>
-            <MobileHeading num="06">Contact</MobileHeading>
+            <MobileHeading num="05">Contact</MobileHeading>
             <p style={{ lineHeight: 1.72, fontSize: 15, maxWidth: 480, marginBottom: 32 }}>
               I'm currently open to new opportunities. Whether it's a project, a question, or just want to say hello — my inbox is always open.
             </p>
@@ -600,35 +574,6 @@ function SmallCard({ proj, S }) {
         ))}
       </div>
     </div>
-  );
-}
-
-/* ── Blog card ── */
-function BlogCard({ post, S }) {
-  const [hov, setHov] = useState(false);
-  return (
-    <a href={post.url} target="_blank" rel="noreferrer"
-      onMouseEnter={() => setHov(true)} onMouseLeave={() => setHov(false)}
-      style={{ display: "block", padding: "18px 20px", borderRadius: 6,
-        background: hov ? S.bgHover : "transparent",
-        border: `1px solid ${hov ? S.borderHov : "transparent"}`,
-        textDecoration: "none", transition: "all 200ms", cursor: "pointer" }}>
-      <div style={{ display: "flex", flexWrap: "wrap", alignItems: "center", gap: "6px 16px", marginBottom: 6 }}>
-        <span style={{ fontFamily: S.mono, fontSize: 11.5, color: S.textMute }}>{post.year}</span>
-        <span style={{ padding: "2px 10px", borderRadius: 99,
-          background: "rgba(100,255,218,0.08)", color: S.accent,
-          fontFamily: S.mono, fontSize: 11 }}>{post.tag}</span>
-      </div>
-      <h3 style={{ fontSize: 15, fontWeight: 600,
-        color: hov ? S.accent : S.textPri, marginBottom: 6, transition: "color 200ms" }}>
-        {post.title}
-        <span style={{ display: "inline-block", marginLeft: 6, opacity: hov ? 1 : 0,
-          transition: "opacity 200ms", verticalAlign: "middle" }}>
-          <ExternalIcon size={14} />
-        </span>
-      </h3>
-      <p style={{ fontSize: 14, lineHeight: 1.65 }}>{post.description}</p>
-    </a>
   );
 }
 
