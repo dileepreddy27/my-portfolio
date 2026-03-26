@@ -121,7 +121,7 @@ const DATA = {
       issuer: "Certification",
       year: "",
       url: "#",
-      badge: "AI",
+      badge: "GAI",
     },
     {
       title: "JavaScript",
