@@ -1,13 +1,18 @@
-import { useState, useEffect, useRef } from "react";
+﻿import { useEffect, useRef, useState } from "react";
 
-/* ═══════════════════════════════════════════════════════
-   DATA  —  Replace all of this with YOUR own information
-═══════════════════════════════════════════════════════ */
 const DATA = {
   name: "Dileep Reddy Battu",
   title: "Software Engineer",
-  tagline: "I build scalable web applications and backend systems with a focus on performance, reliability, and clean code.",
-  photo: "https://github.com/user-attachments/assets/a8d46040-9416-4039-90f7-dd67c9a07ba0",
+  tagline:
+    "I build scalable web applications and backend systems with a focus on performance, reliability, and clean code.",
+  photo:
+    "https://github.com/user-attachments/assets/a8d46040-9416-4039-90f7-dd67c9a07ba0",
+  highlights: [
+    { label: "Experience", value: "3+ years" },
+    { label: "Focus", value: "Full-stack and APIs" },
+    { label: "Industries", value: "Healthcare and enterprise" },
+  ],
+  signature: ["Python", "TypeScript", "React", "Node.js", "PostgreSQL", "GCP", "AWS", "FastAPI"],
 
   about: [
     "Software Engineer with 3+ years of experience building scalable web applications and backend systems for enterprise and healthcare domains. Strong expertise in Python, JavaScript, and full-stack development, with hands-on experience in Unix/Linux environments, API integrations, and Agile development.",
@@ -16,16 +21,31 @@ const DATA = {
   ],
 
   skills: [
-    "Python", "JavaScript", "TypeScript", "React.js",
-    "Next.js", "Node.js", "Express.js", "Flask",
-    "FastAPI", "PostgreSQL", "MongoDB", "Docker",
-    "GCP", "AWS", "HTML & CSS", "Tailwind CSS",
-    "REST APIs", "Git", "Supabase", "n8n",
+    "Python",
+    "JavaScript",
+    "TypeScript",
+    "React.js",
+    "Next.js",
+    "Node.js",
+    "Express.js",
+    "Flask",
+    "FastAPI",
+    "PostgreSQL",
+    "MongoDB",
+    "Docker",
+    "GCP",
+    "AWS",
+    "HTML and CSS",
+    "Tailwind CSS",
+    "REST APIs",
+    "Git",
+    "Supabase",
+    "n8n",
   ],
 
   experience: [
     {
-      period: "Aug 2024 — May 2025",
+      period: "Aug 2024 - May 2025",
       role: "Software Engineer",
       company: "Vesta Teleradiology",
       companyUrl: "#",
@@ -34,7 +54,7 @@ const DATA = {
       tech: ["Python", "Node.js", "REST APIs", "Healthcare"],
     },
     {
-      period: "Aug 2024 — May 2025",
+      period: "Aug 2024 - May 2025",
       role: "Software Engineering Intern",
       company: "Vesta Teleradiology",
       companyUrl: "#",
@@ -43,7 +63,7 @@ const DATA = {
       tech: ["Python", "Node.js", "API Integration", "CI/CD"],
     },
     {
-      period: "Aug 2023 — May 2024",
+      period: "Aug 2023 - May 2024",
       role: "Teaching Assistant (Computer Science)",
       company: "Northern Arizona University",
       companyUrl: "https://nau.edu",
@@ -52,7 +72,7 @@ const DATA = {
       tech: ["Python", "Java", "C++", "Data Structures"],
     },
     {
-      period: "2020 — 2022",
+      period: "2020 - 2022",
       role: "Software Engineer",
       company: "Calibridge Info Systems Pvt. Ltd",
       companyUrl: "#",
@@ -73,7 +93,7 @@ const DATA = {
       featured: true,
     },
     {
-      title: "CredMapping+ (Credentialing & KPI Platform)",
+      title: "CredMapping+ (Credentialing and KPI Platform)",
       description:
         "Developed a credentialing workflow system using n8n, JavaScript, Flask, and PostgreSQL. Automated processes, reducing manual effort by 40%. Supported operations for 300+ healthcare providers and 1200+ facilities. Built scalable backend systems using Supabase and Python.",
       tech: ["n8n", "JavaScript", "Flask", "PostgreSQL", "Supabase"],
@@ -153,9 +173,16 @@ const DATA = {
   },
 };
 
-const NAV = ["About", "Experience", "Projects", "Technologies", "Certifications", "Contact"];
+const NAV = [
+  { id: "home", label: "Home" },
+  { id: "about", label: "About" },
+  { id: "experience", label: "Experience" },
+  { id: "projects", label: "Projects" },
+  { id: "technologies", label: "Technologies" },
+  { id: "certifications", label: "Certifications" },
+  { id: "contact", label: "Contact" },
+];
 
-/* ══════════════  TECHNOLOGIES DATA  ══════════════ */
 const TECH_CATEGORIES = [
   {
     label: "Languages",
@@ -166,7 +193,7 @@ const TECH_CATEGORIES = [
     items: ["React.js", "Next.js", "HTML5", "CSS3", "Tailwind CSS", "Bootstrap", "Vite"],
   },
   {
-    label: "Backend & Runtime",
+    label: "Backend and Runtime",
     items: ["Node.js", "Express.js", "Flask", "FastAPI", "REST APIs", "GraphQL"],
   },
   {
@@ -174,549 +201,461 @@ const TECH_CATEGORIES = [
     items: ["TensorFlow", "PyTorch", "scikit-learn", "Pandas", "NumPy", "Jupyter"],
   },
   {
-    label: "Databases & ORMs",
+    label: "Databases and ORMs",
     items: ["PostgreSQL", "MongoDB", "Supabase", "Redis", "MySQL", "SQLAlchemy"],
   },
   {
-    label: "Tools & DevOps",
-    items: ["Docker", "Git", "CI/CD", "n8n", "Linux/Unix", "Nginx", "Webpack"],
+    label: "Tools and DevOps",
+    items: ["Docker", "Git", "CI/CD", "n8n", "Linux and Unix", "Nginx", "Webpack"],
   },
   {
-    label: "Cloud & Hosting",
-    items: ["Google Cloud Platform", "AWS", "Azure", "Netlify", "Heroku", "Render", "DigitalOcean", "Vercel"],
+    label: "Cloud and Hosting",
+    items: [
+      "Google Cloud Platform",
+      "AWS",
+      "Azure",
+      "Netlify",
+      "Heroku",
+      "Render",
+      "DigitalOcean",
+      "Vercel",
+    ],
   },
 ];
 
-/* ══════════════  ICONS  ══════════════ */
-const GithubIcon = ({ size = 20 }) => (
-  <svg width={size} height={size} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
-    <path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22" />
-  </svg>
-);
-const LinkedinIcon = ({ size = 20 }) => (
-  <svg width={size} height={size} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
-    <path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z" />
-    <rect x="2" y="9" width="4" height="12" /><circle cx="4" cy="4" r="2" />
-  </svg>
-);
-const MailIcon = ({ size = 20 }) => (
-  <svg width={size} height={size} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
-    <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z" />
-    <polyline points="22,6 12,13 2,6" />
-  </svg>
-);
-const ExternalIcon = ({ size = 16 }) => (
-  <svg width={size} height={size} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-    <path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6" />
-    <polyline points="15 3 21 3 21 9" /><line x1="10" y1="14" x2="21" y2="3" />
-  </svg>
-);
-const FolderIcon = ({ accent }) => (
-  <svg width="36" height="36" viewBox="0 0 24 24" fill="none"
-    stroke={accent ? "#64ffda" : "#495670"} strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"
-    style={{ transition: "stroke 200ms", flexShrink: 0 }}>
-    <path d="M22 19a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h5l2 3h9a2 2 0 0 1 2 2z" />
-  </svg>
-);
-
-/* ══════════════  ROOT  ══════════════ */
 export default function Portfolio() {
-  const [activeSection, setActiveSection] = useState("about");
-  const [mouse, setMouse]       = useState({ x: -999, y: -999 });
+  const [activeSection, setActiveSection] = useState("home");
   const [menuOpen, setMenuOpen] = useState(false);
-  const [form, setForm]         = useState({ name: "", email: "", message: "" });
-  const [sent, setSent]         = useState(false);
+  const [form, setForm] = useState({
+    firstName: "",
+    lastName: "",
+    email: "",
+    subject: "",
+    message: "",
+  });
+  const [sent, setSent] = useState(false);
   const refs = useRef({});
 
   useEffect(() => {
-    const h = (e) => setMouse({ x: e.clientX, y: e.clientY });
-    window.addEventListener("mousemove", h);
-    return () => window.removeEventListener("mousemove", h);
+    const link = document.createElement("link");
+    link.rel = "stylesheet";
+    link.href =
+      "https://fonts.googleapis.com/css2?family=Manrope:wght@300;400;500;600;700&family=Space+Grotesk:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap";
+    document.head.appendChild(link);
+    return () => document.head.removeChild(link);
   }, []);
 
   useEffect(() => {
-    const obs = new IntersectionObserver(
-      (entries) => entries.forEach((e) => { if (e.isIntersecting) setActiveSection(e.target.id); }),
+    const observer = new IntersectionObserver(
+      (entries) =>
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) setActiveSection(entry.target.id);
+        }),
       { rootMargin: "-30% 0px -60% 0px" }
     );
-    NAV.forEach((n) => { const el = refs.current[n.toLowerCase()]; if (el) obs.observe(el); });
-    return () => obs.disconnect();
+    NAV.forEach((item) => {
+      const el = refs.current[item.id];
+      if (el) observer.observe(el);
+    });
+    return () => observer.disconnect();
   }, []);
 
-  useEffect(() => {
-    const l = document.createElement("link");
-    l.rel  = "stylesheet";
-    l.href = "https://fonts.googleapis.com/css2?family=Raleway:wght@300;400;500;600;700&family=Fira+Code:wght@400;500&display=swap";
-    document.head.appendChild(l);
-    return () => document.head.removeChild(l);
-  }, []);
-
-  const goto   = (id) => { refs.current[id]?.scrollIntoView({ behavior: "smooth" }); setMenuOpen(false); };
-  const submit = (e) => {
-    e.preventDefault();
-    // 👉 Wire to your Node.js API later:
-    // fetch("/api/contact", { method:"POST", headers:{"Content-Type":"application/json"}, body: JSON.stringify(form) })
-    setSent(true);
-    setForm({ name: "", email: "", message: "" });
+  const goTo = (id) => {
+    refs.current[id]?.scrollIntoView({ behavior: "smooth" });
+    setMenuOpen(false);
   };
 
-  const S = {
-    bg:        "#0a192f",
-    bgCard:    "rgba(255,255,255,0.025)",
-    bgHover:   "rgba(100,255,218,0.05)",
-    border:    "rgba(255,255,255,0.06)",
-    borderHov: "rgba(100,255,218,0.18)",
-    accent:    "#64ffda",
-    textPri:   "#ccd6f6",
-    textSec:   "#8892b0",
-    textMute:  "#495670",
-    mono:      "'Fira Code', monospace",
-    sans:      "'Raleway', sans-serif",
+  const submit = (e) => {
+    e.preventDefault();
+    setSent(true);
+    setForm({ firstName: "", lastName: "", email: "", subject: "", message: "" });
   };
 
   return (
-    <div style={{ backgroundColor: S.bg, color: S.textSec, fontFamily: S.sans, minHeight: "100vh", overflowX: "hidden", position: "relative" }}>
-
-      {/* ── Animated background waves ── */}
-      <div aria-hidden="true" style={{ position: "fixed", inset: 0, zIndex: 0, overflow: "hidden", pointerEvents: "none" }}>
-        <div className="wave wave1" />
-        <div className="wave wave2" />
-        <div className="wave wave3" />
-      </div>
-
-      {/* Cursor spotlight */}
-      <div className="pointer-events-none fixed inset-0 z-20"
-        style={{ background: `radial-gradient(700px circle at ${mouse.x}px ${mouse.y}px, rgba(100,255,218,0.055) 0%, transparent 75%)` }} />
-
-      {/* ── Mobile nav ── */}
-      <header className="lg:hidden fixed inset-x-0 top-0 z-50 flex justify-between items-center px-6 py-4"
-        style={{ background: "rgba(10,25,47,0.93)", backdropFilter: "blur(12px)", borderBottom: `1px solid ${S.border}` }}>
-        <span style={{ fontFamily: S.mono, fontSize: 13, color: S.accent, letterSpacing: "0.2em" }}>DB.</span>
-        <button onClick={() => setMenuOpen(!menuOpen)} style={{ color: S.textPri, background: "none", border: "none", cursor: "pointer" }}>
-          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
-            {menuOpen
-              ? <><line x1="18" y1="6" x2="6" y2="18" /><line x1="6" y1="6" x2="18" y2="18" /></>
-              : <><line x1="3" y1="6" x2="21" y2="6" /><line x1="3" y1="12" x2="21" y2="12" /><line x1="3" y1="18" x2="21" y2="18" /></>}
-          </svg>
-        </button>
-        {menuOpen && (
-          <nav className="absolute inset-x-0 top-full flex flex-col items-center gap-6 py-8"
-            style={{ background: "#0d2240", borderBottom: `1px solid ${S.border}` }}>
-            {NAV.map((n, i) => (
-              <button key={n} onClick={() => goto(n.toLowerCase())}
-                style={{ fontFamily: S.mono, fontSize: 12, letterSpacing: "0.08em",
-                  color: activeSection === n.toLowerCase() ? S.accent : S.textMute,
-                  background: "none", border: "none", cursor: "pointer" }}>
-                <span style={{ color: S.accent, marginRight: 8 }}>0{i + 1}.</span>{n}
+    <div className="app">
+      <header className="top-nav">
+        <div className="container nav-inner">
+          <button className="logo" onClick={() => goTo("home")}>
+            DRB
+          </button>
+          <nav className={`nav ${menuOpen ? "nav--open" : ""}`}>
+            {NAV.map((item, idx) => (
+              <button
+                key={item.id}
+                onClick={() => goTo(item.id)}
+                className={`nav-link ${activeSection === item.id ? "nav-link--active" : ""}`}
+              >
+                <span className="nav-index">0{idx + 1}</span>
+                {item.label}
               </button>
             ))}
           </nav>
-        )}
+          <button
+            className={`menu-btn ${menuOpen ? "menu-btn--open" : ""}`}
+            onClick={() => setMenuOpen((prev) => !prev)}
+            aria-label="Toggle navigation"
+          >
+            <span />
+            <span />
+          </button>
+        </div>
       </header>
 
-      <div className="mx-auto max-w-screen-xl px-6 md:px-12 lg:px-20 xl:px-24 lg:flex lg:gap-10 xl:gap-16" style={{ position: "relative", zIndex: 1 }}>
-
-        {/* ════  SIDEBAR  ════ */}
-        <aside className="hidden lg:flex lg:flex-col lg:justify-between lg:sticky lg:top-0 lg:h-screen lg:w-[42%] lg:shrink-0 lg:py-24">
-          <div>
-            {DATA.photo && (
-              <img src={DATA.photo} alt={DATA.name}
-                style={{ width: 100, height: 100, borderRadius: "50%", objectFit: "cover",
-                  border: "2px solid rgba(100,255,218,0.3)", marginBottom: 20 }} />
-            )}
-            <h1 style={{ fontFamily: S.sans, fontSize: "clamp(2.2rem,3.5vw,3rem)", fontWeight: 700,
-              color: S.textPri, lineHeight: 1.1, letterSpacing: "-0.02em", marginBottom: 12 }}>
-              {DATA.name}
-            </h1>
-            <h2 style={{ fontFamily: S.sans, fontSize: "1.1rem", fontWeight: 500, color: S.textPri, marginBottom: 18 }}>
-              {DATA.title}
-            </h2>
-            <p style={{ maxWidth: 300, lineHeight: 1.7, fontSize: 14.5, color: S.textSec }}>
-              {DATA.tagline}
-            </p>
-            <nav style={{ marginTop: 52, display: "flex", flexDirection: "column", gap: 20 }}>
-              {NAV.map((n) => {
-                const active = activeSection === n.toLowerCase();
-                return (
-                  <button key={n} onClick={() => goto(n.toLowerCase())}
-                    style={{ display: "flex", alignItems: "center", gap: 16, textAlign: "left",
-                      cursor: "pointer", background: "none", border: "none", padding: 0 }}>
-                    <span style={{ display: "block", height: 1,
-                      width: active ? 60 : 28,
-                      background: active ? S.accent : S.textMute,
-                      transition: "width 300ms ease, background 250ms ease" }} />
-                    <span style={{ fontFamily: S.mono, fontSize: 11.5,
-                      letterSpacing: "0.15em", textTransform: "uppercase",
-                      color: active ? S.textPri : S.textMute,
-                      transition: "color 200ms" }}>
-                      {n}
-                    </span>
-                  </button>
-                );
-              })}
-            </nav>
-          </div>
-          <div style={{ display: "flex", alignItems: "center", gap: 20 }}>
-            {[
-              { href: DATA.social.github,   Icon: GithubIcon,   label: "GitHub"   },
-              { href: DATA.social.linkedin, Icon: LinkedinIcon, label: "LinkedIn" },
-              { href: `mailto:${DATA.social.email}`, Icon: MailIcon, label: "Email" },
-            ].map(({ href, Icon, label }) => (
-              <a key={label} href={href} target="_blank" rel="noreferrer" aria-label={label}
-                style={{ color: S.textMute, transition: "color 200ms, transform 200ms" }}
-                onMouseEnter={(e) => { e.currentTarget.style.color = S.accent; e.currentTarget.style.transform = "translateY(-2px)"; }}
-                onMouseLeave={(e) => { e.currentTarget.style.color = S.textMute; e.currentTarget.style.transform = "none"; }}>
-                <Icon />
-              </a>
-            ))}
-          </div>
-        </aside>
-
-        {/* ════  MAIN CONTENT  ════ */}
-        <main style={{ flex: 1, paddingTop: "6rem", paddingBottom: "6rem" }}
-          className="lg:pt-24 lg:pb-24 flex flex-col gap-36">
-
-          {/* ABOUT */}
-          <section id="about" ref={(el) => (refs.current["about"] = el)}>
-            <MobileHeading num="01">About</MobileHeading>
-            <div style={{ display: "flex", flexDirection: "column", gap: 14, lineHeight: 1.72, fontSize: 15 }}>
-              {DATA.about.map((p, i) => <p key={i}>{p}</p>)}
-            </div>
-            <div style={{ marginTop: 28 }}>
-              <p style={{ fontFamily: S.mono, fontSize: 11.5, color: S.accent,
-                letterSpacing: "0.18em", textTransform: "uppercase", marginBottom: 14 }}>
-                Technologies I use
-              </p>
-              <ul style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: "8px 0" }}>
-                {DATA.skills.map((s) => (
-                  <li key={s} style={{ display: "flex", alignItems: "center", gap: 10, fontSize: 14 }}>
-                    <span style={{ color: S.accent, fontFamily: S.mono, fontSize: 11 }}>▹</span>{s}
-                  </li>
-                ))}
-              </ul>
-            </div>
-          </section>
-
-          {/* EXPERIENCE */}
-          <section id="experience" ref={(el) => (refs.current["experience"] = el)}>
-            <MobileHeading num="02">Experience</MobileHeading>
-            <div style={{ display: "flex", flexDirection: "column", gap: 4 }}>
-              {DATA.experience.map((job, i) => <ExpCard key={i} job={job} S={S} />)}
-            </div>
-            <a href="/resume.pdf" download
-              onMouseEnter={(e) => { e.currentTarget.style.color = S.accent; e.currentTarget.style.borderBottomColor = S.accent; }}
-              onMouseLeave={(e) => { e.currentTarget.style.color = S.textPri; e.currentTarget.style.borderBottomColor = "rgba(100,255,218,0.3)"; }}
-              style={{ display: "inline-flex", alignItems: "center", gap: 8, marginTop: 28,
-                fontFamily: S.mono, fontSize: 13, color: S.textPri, textDecoration: "none",
-                letterSpacing: "0.06em", borderBottom: "1px solid rgba(100,255,218,0.3)",
-                paddingBottom: 2, transition: "all 200ms" }}>
-              View Full Résumé
-              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-                <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4" />
-                <polyline points="7 10 12 15 17 10" /><line x1="12" y1="15" x2="12" y2="3" />
-              </svg>
-            </a>
-          </section>
-
-          {/* PROJECTS */}
-          <section id="projects" ref={(el) => (refs.current["projects"] = el)}>
-            <MobileHeading num="03">Projects</MobileHeading>
-            <div style={{ display: "flex", flexDirection: "column", gap: 12, marginBottom: 32 }}>
-              {DATA.projects.filter((p) => p.featured).map((p, i) => <ProjCard key={i} proj={p} S={S} />)}
-            </div>
-            <p style={{ fontFamily: S.mono, fontSize: 11.5, color: S.accent,
-              letterSpacing: "0.18em", textTransform: "uppercase", marginBottom: 14 }}>
-              Other noteworthy projects
-            </p>
-            <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fill,minmax(220px,1fr))", gap: 12 }}>
-              {DATA.projects.filter((p) => !p.featured).map((p, i) => <SmallCard key={i} proj={p} S={S} />)}
-            </div>
-          </section>
-
-          {/* TECHNOLOGIES */}
-          <section id="technologies" ref={(el) => (refs.current["technologies"] = el)}>
-            <MobileHeading num="04">Technologies</MobileHeading>
-            <TechSection S={S} />
-          </section>
-
-          {/* CERTIFICATIONS */}
-          <section id="certifications" ref={(el) => (refs.current["certifications"] = el)}>
-            <MobileHeading num="05">Certifications</MobileHeading>
-            <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fill,minmax(220px,1fr))", gap: 12 }}>
-              {DATA.certifications.map((cert, i) => <CertCard key={i} cert={cert} S={S} />)}
-            </div>
-          </section>
-
-          {/* CONTACT */}
-          <section id="contact" ref={(el) => (refs.current["contact"] = el)}>
-            <MobileHeading num="06">Contact</MobileHeading>
-            <p style={{ lineHeight: 1.72, fontSize: 15, maxWidth: 480, marginBottom: 32 }}>
-              I'm currently open to new opportunities. Whether it's a project, a question, or just want to say hello — my inbox is always open.
-            </p>
-            {sent ? (
-              <div style={{ padding: "18px 22px", borderRadius: 6,
-                border: "1px solid rgba(100,255,218,0.3)", background: "rgba(100,255,218,0.04)",
-                color: S.accent, fontFamily: S.mono, fontSize: 13 }}>
-                ✓ Message sent — I'll get back to you soon.
-              </div>
-            ) : (
-              <div style={{ maxWidth: 480, display: "flex", flexDirection: "column", gap: 16 }}>
-                <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: 12 }}>
-                  <FormInput label="Name"  value={form.name}  onChange={(v) => setForm({ ...form, name: v })}  S={S} />
-                  <FormInput label="Email" type="email" value={form.email} onChange={(v) => setForm({ ...form, email: v })} S={S} />
-                </div>
-                <div>
-                  <label style={{ display: "block", marginBottom: 8, fontFamily: S.mono, fontSize: 11,
-                    color: S.accent, letterSpacing: "0.18em", textTransform: "uppercase" }}>Message</label>
-                  <textarea rows={5} value={form.message} placeholder="What's on your mind?"
-                    onChange={(e) => setForm({ ...form, message: e.target.value })}
-                    onFocus={(e) => (e.target.style.borderColor = "rgba(100,255,218,0.45)")}
-                    onBlur={(e)  => (e.target.style.borderColor = "rgba(100,255,218,0.12)")}
-                    style={{ width: "100%", background: "rgba(255,255,255,0.025)",
-                      border: "1px solid rgba(100,255,218,0.12)", borderRadius: 6,
-                      padding: "12px 14px", fontSize: 14, color: S.textPri,
-                      fontFamily: S.sans, outline: "none", resize: "none",
-                      transition: "border-color 200ms", boxSizing: "border-box" }} />
-                </div>
-                <button onClick={submit}
-                  onMouseEnter={(e) => (e.target.style.background = "rgba(100,255,218,0.1)")}
-                  onMouseLeave={(e) => (e.target.style.background = "transparent")}
-                  style={{ alignSelf: "flex-start", padding: "14px 28px",
-                    border: `1px solid ${S.accent}`, borderRadius: 4,
-                    background: "transparent", color: S.accent,
-                    fontFamily: S.mono, fontSize: 13, letterSpacing: "0.08em",
-                    cursor: "pointer", transition: "background 200ms" }}>
-                  Send Message
+      <main>
+        <section id="home" ref={(el) => (refs.current.home = el)} className="section hero">
+          <div className="container hero-grid">
+            <div className="hero-copy">
+              <p className="eyebrow">{DATA.title}</p>
+              <h1 className="hero-title">{DATA.name}</h1>
+              <p className="hero-lead">{DATA.tagline}</p>
+              <div className="cta-row">
+                <button className="btn btn-primary" onClick={() => goTo("projects")}>
+                  See My Work
+                  <ArrowIcon />
                 </button>
+                <a className="btn btn-ghost" href="/resume.pdf">
+                  Resume
+                  <DownloadIcon />
+                </a>
               </div>
-            )}
-            <p style={{ marginTop: 80, fontFamily: S.mono, fontSize: 12, color: S.textMute, letterSpacing: "0.04em" }}>
-              Designed &amp; Built by {DATA.name} · {new Date().getFullYear()}
-            </p>
-          </section>
+              <div className="social-row">
+                <SocialLink href={DATA.social.linkedin} label="LinkedIn">
+                  <LinkedinIcon />
+                </SocialLink>
+                <SocialLink href={DATA.social.github} label="GitHub">
+                  <GithubIcon />
+                </SocialLink>
+                <SocialLink href={`mailto:${DATA.social.email}`} label="Email">
+                  <MailIcon />
+                </SocialLink>
+              </div>
+            </div>
+            <div className="hero-card">
+              <div className="hero-photo">
+                <img src={DATA.photo} alt={DATA.name} />
+              </div>
+              <div className="hero-stats">
+                {DATA.highlights.map((item) => (
+                  <div key={item.label} className="stat">
+                    <span className="stat-label">{item.label}</span>
+                    <span className="stat-value">{item.value}</span>
+                  </div>
+                ))}
+              </div>
+              <div className="hero-tags">
+                {DATA.signature.map((skill) => (
+                  <span key={skill} className="chip">
+                    {skill}
+                  </span>
+                ))}
+              </div>
+            </div>
+          </div>
+        </section>
 
-        </main>
-      </div>
+        <section id="about" ref={(el) => (refs.current.about = el)} className="section">
+          <div className="container about-grid">
+            <div>
+              <SectionIntro
+                kicker="More About Me"
+                title="Building resilient systems with clarity and intention."
+                description="A snapshot of the values and strengths that guide my work."
+              />
+              <div className="body-copy">
+                {DATA.about.map((paragraph, idx) => (
+                  <p key={idx}>{paragraph}</p>
+                ))}
+              </div>
+            </div>
+            <div className="about-card">
+              <p className="card-kicker">Core strengths</p>
+              <ul className="strength-list">
+                <li>Backend systems and API design</li>
+                <li>Cloud automation and reliable delivery</li>
+                <li>Cross-functional collaboration and mentorship</li>
+              </ul>
+              <div className="divider" />
+              <p className="card-kicker">Toolbox</p>
+              <div className="chip-row">
+                {DATA.skills.map((skill) => (
+                  <span key={skill} className="chip chip-muted">
+                    {skill}
+                  </span>
+                ))}
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <section
+          id="experience"
+          ref={(el) => (refs.current.experience = el)}
+          className="section section-alt"
+        >
+          <div className="container">
+            <SectionIntro
+              kicker="Experience"
+              title="Leading with ownership and steady execution."
+              description="Roles where I delivered measurable impact." 
+            />
+            <div className="timeline">
+              {DATA.experience.map((job, idx) => (
+                <ExperienceCard key={idx} job={job} />
+              ))}
+            </div>
+          </div>
+        </section>
+
+        <section id="projects" ref={(el) => (refs.current.projects = el)} className="section">
+          <div className="container">
+            <SectionIntro
+              kicker="Projects"
+              title="Products, platforms, and experiments I am proud of."
+              description="Selected work across healthcare, automation, and analytics." 
+            />
+            <div className="project-grid">
+              {DATA.projects.map((project, idx) => (
+                <ProjectCard key={idx} project={project} />
+              ))}
+            </div>
+          </div>
+        </section>
+
+        <section
+          id="technologies"
+          ref={(el) => (refs.current.technologies = el)}
+          className="section section-alt"
+        >
+          <div className="container">
+            <SectionIntro
+              kicker="Technologies"
+              title="Tools I use to deliver end-to-end solutions."
+              description="Explore the stacks I lean on most." 
+            />
+            <TechSection />
+          </div>
+        </section>
+
+        <section
+          id="certifications"
+          ref={(el) => (refs.current.certifications = el)}
+          className="section"
+        >
+          <div className="container">
+            <SectionIntro
+              kicker="Certifications"
+              title="Credentials that back up my craft."
+              description="Continuous learning across software and AI." 
+            />
+            <div className="cert-grid">
+              {DATA.certifications.map((cert, idx) => (
+                <CertCard key={idx} cert={cert} />
+              ))}
+            </div>
+          </div>
+        </section>
+
+        <section id="contact" ref={(el) => (refs.current.contact = el)} className="section">
+          <div className="container">
+            <div className="contact-card">
+              <div className="contact-head">
+                <div>
+                  <p className="eyebrow">Contact Me</p>
+                  <h2>Let's build something memorable together.</h2>
+                  <p className="section-lead">
+                    I'm currently open to new opportunities. Whether it is a project, a question,
+                    or just a quick hello, my inbox is always open.
+                  </p>
+                </div>
+                <div className="contact-social">
+                  <SocialLink href={DATA.social.linkedin} label="LinkedIn">
+                    <LinkedinIcon />
+                  </SocialLink>
+                  <SocialLink href={`mailto:${DATA.social.email}`} label="Email">
+                    <MailIcon />
+                  </SocialLink>
+                </div>
+              </div>
+
+              {sent ? (
+                <div className="success">
+                  Message sent. I will get back to you soon.
+                </div>
+              ) : (
+                <form className="contact-form" onSubmit={submit}>
+                  <div className="form-row">
+                    <InputField
+                      label="First Name"
+                      value={form.firstName}
+                      onChange={(value) => setForm({ ...form, firstName: value })}
+                    />
+                    <InputField
+                      label="Last Name"
+                      value={form.lastName}
+                      onChange={(value) => setForm({ ...form, lastName: value })}
+                    />
+                  </div>
+                  <div className="form-row">
+                    <InputField
+                      label="Subject"
+                      value={form.subject}
+                      onChange={(value) => setForm({ ...form, subject: value })}
+                    />
+                    <InputField
+                      label="Email"
+                      type="email"
+                      value={form.email}
+                      onChange={(value) => setForm({ ...form, email: value })}
+                    />
+                  </div>
+                  <TextAreaField
+                    label="Message"
+                    value={form.message}
+                    onChange={(value) => setForm({ ...form, message: value })}
+                  />
+                  <button className="btn btn-primary" type="submit">
+                    Send Message
+                  </button>
+                </form>
+              )}
+            </div>
+            <p className="footer-note">Designed and built by {DATA.name}. {new Date().getFullYear()}</p>
+          </div>
+        </section>
+      </main>
     </div>
   );
 }
 
-/* ── Mobile section heading ── */
-function MobileHeading({ children, num }) {
+function SectionIntro({ kicker, title, description }) {
   return (
-    <div className="lg:hidden" style={{ display: "flex", alignItems: "center", gap: 14, marginBottom: 28 }}>
-      <span style={{ fontFamily: "'Fira Code',monospace", fontSize: 12, color: "#64ffda" }}>{num}.</span>
-      <h2 style={{ fontFamily: "'Raleway',sans-serif", fontSize: 18, fontWeight: 700, color: "#ccd6f6", whiteSpace: "nowrap" }}>
-        {children}
-      </h2>
-      <span style={{ flex: 1, height: 1, background: "rgba(100,255,218,0.12)" }} />
+    <div className="section-intro">
+      <p className="eyebrow">{kicker}</p>
+      <h2>{title}</h2>
+      {description ? <p className="section-lead">{description}</p> : null}
     </div>
   );
 }
 
-/* ── Experience card ── */
-function ExpCard({ job, S }) {
-  const [hov, setHov] = useState(false);
+function ExperienceCard({ job }) {
   return (
-    <div onMouseEnter={() => setHov(true)} onMouseLeave={() => setHov(false)}
-      style={{ padding: "18px 20px", borderRadius: 6, cursor: "default",
-        background: hov ? S.bgHover : "transparent",
-        border: `1px solid ${hov ? S.borderHov : "transparent"}`,
-        transition: "all 200ms" }}>
-      <div style={{ display: "flex", flexWrap: "wrap", gap: "0 24px", alignItems: "baseline", marginBottom: 6 }}>
-        <h3 style={{ fontSize: 15, fontWeight: 600, color: S.textPri, margin: 0 }}>
-          {job.role} ·{" "}
-          <a href={job.companyUrl} target="_blank" rel="noreferrer"
-            style={{ color: S.accent, textDecoration: "none" }}>{job.company}</a>
+    <article className="experience-card">
+      <div className="experience-period">{job.period}</div>
+      <div className="experience-body">
+        <h3>
+          {job.role} -{" "}
+          <a href={job.companyUrl} target="_blank" rel="noreferrer">
+            {job.company}
+          </a>
         </h3>
-        <span style={{ fontFamily: S.mono, fontSize: 12, color: S.textMute }}>{job.period}</span>
-      </div>
-      <p style={{ fontSize: 14, lineHeight: 1.68, marginBottom: 12 }}>{job.description}</p>
-      <div style={{ display: "flex", flexWrap: "wrap", gap: 8 }}>
-        {job.tech.map((t) => (
-          <span key={t} style={{ padding: "3px 12px", borderRadius: 99,
-            background: "rgba(100,255,218,0.08)", color: S.accent,
-            fontFamily: S.mono, fontSize: 11.5 }}>{t}</span>
-        ))}
-      </div>
-    </div>
-  );
-}
-
-/* ── Featured project card ── */
-function ProjCard({ proj, S }) {
-  const [hov, setHov] = useState(false);
-  return (
-    <div onMouseEnter={() => setHov(true)} onMouseLeave={() => setHov(false)}
-      style={{ padding: 24, borderRadius: 6, cursor: "default",
-        background: hov ? S.bgHover : S.bgCard,
-        border: `1px solid ${hov ? S.borderHov : S.border}`,
-        transition: "all 220ms" }}>
-      <div style={{ display: "flex", justifyContent: "space-between", alignItems: "flex-start", marginBottom: 14 }}>
-        <FolderIcon accent={hov} />
-        <div style={{ display: "flex", gap: 14 }}>
-          {proj.github && (
-            <a href={proj.github} target="_blank" rel="noreferrer" aria-label="GitHub"
-              style={{ color: hov ? S.textPri : S.textMute, transition: "color 200ms" }}>
-              <GithubIcon size={18} />
-            </a>
-          )}
-          {proj.live && (
-            <a href={proj.live} target="_blank" rel="noreferrer" aria-label="Live"
-              style={{ color: hov ? S.textPri : S.textMute, transition: "color 200ms" }}>
-              <ExternalIcon size={18} />
-            </a>
-          )}
+        <p>{job.description}</p>
+        <div className="tag-row">
+          {job.tech.map((tech) => (
+            <span key={tech} className="chip chip-muted">
+              {tech}
+            </span>
+          ))}
         </div>
       </div>
-      <h3 style={{ fontSize: 16, fontWeight: 600, color: hov ? S.accent : S.textPri,
-        marginBottom: 10, transition: "color 200ms" }}>{proj.title}</h3>
-      <p style={{ fontSize: 14, lineHeight: 1.68, marginBottom: 18 }}>{proj.description}</p>
-      <div style={{ display: "flex", flexWrap: "wrap", gap: "4px 16px" }}>
-        {proj.tech.map((t) => (
-          <span key={t} style={{ fontFamily: S.mono, fontSize: 11, color: S.accent, letterSpacing: "0.04em" }}>{t}</span>
-        ))}
-      </div>
-    </div>
+    </article>
   );
 }
 
-/* ── Small project card ── */
-function SmallCard({ proj, S }) {
-  const [hov, setHov] = useState(false);
+function ProjectCard({ project }) {
+  const label = project.featured ? "Featured" : "Project";
   return (
-    <div onMouseEnter={() => setHov(true)} onMouseLeave={() => setHov(false)}
-      style={{ padding: 20, borderRadius: 6, cursor: "default",
-        background: hov ? S.bgHover : S.bgCard,
-        border: `1px solid ${hov ? S.borderHov : S.border}`,
-        transition: "all 220ms", display: "flex", flexDirection: "column",
-        justifyContent: "space-between", minHeight: 170 }}>
-      <div>
-        <div style={{ display: "flex", justifyContent: "space-between", marginBottom: 12 }}>
-          <FolderIcon accent={hov} />
-          <div style={{ display: "flex", gap: 12 }}>
-            {proj.github && (
-              <a href={proj.github} aria-label="GitHub"
-                style={{ color: hov ? S.textPri : S.textMute, transition: "color 200ms" }}>
-                <GithubIcon size={16} />
+    <article className={`project-card ${project.featured ? "project-card--featured" : ""}`}>
+      <div className="project-visual">
+        <div className="project-glow" />
+        <span className="project-label">{label}</span>
+      </div>
+      <div className="project-body">
+        <div className="project-head">
+          <h3>{project.title}</h3>
+          <div className="project-links">
+            {project.github ? (
+              <a href={project.github} target="_blank" rel="noreferrer" aria-label="GitHub">
+                <GithubIcon />
               </a>
-            )}
-            {proj.live && (
-              <a href={proj.live} aria-label="Live"
-                style={{ color: hov ? S.textPri : S.textMute, transition: "color 200ms" }}>
+            ) : null}
+            {project.live ? (
+              <a href={project.live} target="_blank" rel="noreferrer" aria-label="Live site">
                 <ExternalIcon />
               </a>
-            )}
+            ) : null}
           </div>
         </div>
-        <h3 style={{ fontSize: 14, fontWeight: 600, color: hov ? S.accent : S.textPri,
-          marginBottom: 8, transition: "color 200ms" }}>{proj.title}</h3>
-        <p style={{ fontSize: 13, lineHeight: 1.65 }}>{proj.description}</p>
+        <p>{project.description}</p>
+        <div className="tag-row">
+          {project.tech.map((tech) => (
+            <span key={tech} className="chip chip-outline">
+              {tech}
+            </span>
+          ))}
+        </div>
       </div>
-      <div style={{ display: "flex", flexWrap: "wrap", gap: "4px 14px", marginTop: 14 }}>
-        {proj.tech.map((t) => (
-          <span key={t} style={{ fontFamily: S.mono, fontSize: 11, color: S.accent, letterSpacing: "0.04em" }}>{t}</span>
-        ))}
-      </div>
-    </div>
+    </article>
   );
 }
 
-/* ── Certification card ── */
-function CertCard({ cert, S }) {
-  const [hov, setHov] = useState(false);
+function CertCard({ cert }) {
   return (
-    <a href={cert.url} target="_blank" rel="noreferrer"
-      onMouseEnter={() => setHov(true)} onMouseLeave={() => setHov(false)}
-      style={{ display: "flex", flexDirection: "column", justifyContent: "space-between",
-        padding: 20, borderRadius: 6, minHeight: 140,
-        background: hov ? S.bgHover : S.bgCard,
-        border: `1px solid ${hov ? S.borderHov : S.border}`,
-        textDecoration: "none", transition: "all 220ms", cursor: "pointer" }}>
-      <div style={{ display: "flex", justifyContent: "space-between", alignItems: "flex-start", marginBottom: 14 }}>
-        <div style={{ width: 44, height: 44, borderRadius: 8,
-          background: "rgba(100,255,218,0.1)", border: "1px solid rgba(100,255,218,0.2)",
-          display: "flex", alignItems: "center", justifyContent: "center",
-          fontFamily: S.mono, fontSize: 11, fontWeight: 600, color: S.accent,
-          letterSpacing: "0.05em" }}>
-          {cert.badge}
-        </div>
-        <span style={{ fontFamily: S.mono, fontSize: 11, color: S.textMute }}>{cert.year}</span>
-      </div>
+    <a className="cert-card" href={cert.url} target="_blank" rel="noreferrer">
+      <div className="cert-badge">{cert.badge}</div>
       <div>
-        <h3 style={{ fontSize: 13.5, fontWeight: 600,
-          color: hov ? S.accent : S.textPri, marginBottom: 4, transition: "color 200ms",
-          lineHeight: 1.4 }}>{cert.title}</h3>
-        <p style={{ fontSize: 12, color: S.textMute, fontFamily: S.mono }}>{cert.issuer}</p>
+        <h3>{cert.title}</h3>
+        <p>{cert.issuer}</p>
       </div>
+      <span className="cert-year">{cert.year}</span>
     </a>
   );
 }
 
-/* ── Technologies section with category tabs ── */
-function TechSection({ S }) {
+function TechSection() {
   const [activeTab, setActiveTab] = useState("All");
-  const allItems = TECH_CATEGORIES.flatMap((c) => c.items.map((item) => ({ item, category: c.label })));
-  const tabs = ["All", ...TECH_CATEGORIES.map((c) => c.label)];
-
+  const tabs = ["All", ...TECH_CATEGORIES.map((cat) => cat.label)];
+  const allItems = TECH_CATEGORIES.flatMap((cat) =>
+    cat.items.map((item) => ({ item, category: cat.label }))
+  );
   const filtered =
-    activeTab === "All"
-      ? allItems
-      : allItems.filter((x) => x.category === activeTab);
+    activeTab === "All" ? allItems : allItems.filter((item) => item.category === activeTab);
 
   return (
-    <div>
-      {/* Tab chips */}
-      <div role="tablist" aria-label="Technology categories"
-        style={{ display: "flex", flexWrap: "wrap", gap: 10, marginBottom: 28 }}>
-        {tabs.map((tab) => {
-          const active = tab === activeTab;
-          return (
-            <button
-              key={tab}
-              role="tab"
-              aria-selected={active}
-              onClick={() => setActiveTab(tab)}
-              style={{
-                padding: "6px 16px",
-                borderRadius: 99,
-                border: `1px solid ${active ? S.accent : "rgba(100,255,218,0.2)"}`,
-                background: active ? "rgba(100,255,218,0.1)" : "transparent",
-                color: active ? S.accent : S.textMute,
-                fontFamily: S.mono,
-                fontSize: 11.5,
-                letterSpacing: "0.06em",
-                cursor: "pointer",
-                transition: "all 200ms",
-              }}
-            >
-              {tab}
-            </button>
-          );
-        })}
+    <div className="tech">
+      <div className="tech-tabs" role="tablist" aria-label="Technology categories">
+        {tabs.map((tab) => (
+          <button
+            key={tab}
+            className={`chip ${activeTab === tab ? "chip-active" : "chip-muted"}`}
+            onClick={() => setActiveTab(tab)}
+            role="tab"
+            aria-selected={activeTab === tab}
+          >
+            {tab}
+          </button>
+        ))}
       </div>
-
-      {/* Tech chips grid */}
       {activeTab === "All" ? (
-        <div style={{ display: "flex", flexDirection: "column", gap: 24 }}>
+        <div className="tech-groups">
           {TECH_CATEGORIES.map((cat) => (
-            <div key={cat.label}>
-              <p style={{ fontFamily: S.mono, fontSize: 11, color: S.accent,
-                letterSpacing: "0.18em", textTransform: "uppercase", marginBottom: 12 }}>
-                {cat.label}
-              </p>
-              <div style={{ display: "flex", flexWrap: "wrap", gap: 8 }}>
+            <div key={cat.label} className="tech-group">
+              <p className="eyebrow">{cat.label}</p>
+              <div className="chip-row">
                 {cat.items.map((item) => (
-                  <TechChip key={item} label={item} S={S} />
+                  <span key={item} className="chip chip-outline">
+                    {item}
+                  </span>
                 ))}
               </div>
             </div>
           ))}
         </div>
       ) : (
-        <div style={{ display: "flex", flexWrap: "wrap", gap: 10 }}>
+        <div className="chip-row">
           {filtered.map(({ item }) => (
-            <TechChip key={item} label={item} S={S} large />
+            <span key={item} className="chip chip-outline">
+              {item}
+            </span>
           ))}
         </div>
       )}
@@ -724,50 +663,140 @@ function TechSection({ S }) {
   );
 }
 
-function TechChip({ label, S, large }) {
-  const [hov, setHov] = useState(false);
+function InputField({ label, value, onChange, type = "text" }) {
   return (
-    <span
-      onMouseEnter={() => setHov(true)}
-      onMouseLeave={() => setHov(false)}
-      style={{
-        display: "inline-flex",
-        alignItems: "center",
-        gap: 6,
-        padding: large ? "8px 18px" : "5px 14px",
-        borderRadius: 99,
-        border: `1px solid ${hov ? S.accent : "rgba(100,255,218,0.15)"}`,
-        background: hov ? "rgba(100,255,218,0.08)" : "rgba(255,255,255,0.025)",
-        color: hov ? S.accent : S.textSec,
-        fontFamily: S.mono,
-        fontSize: large ? 13 : 12,
-        letterSpacing: "0.04em",
-        transition: "all 180ms",
-        cursor: "default",
-        userSelect: "none",
-      }}
-    >
-      <span style={{ color: S.accent, fontSize: 9 }}>▹</span>
-      {label}
-    </span>
+    <label className="field">
+      <span>{label}</span>
+      <input
+        type={type}
+        value={value}
+        onChange={(event) => onChange(event.target.value)}
+        placeholder={label}
+        required
+      />
+    </label>
   );
 }
 
-/* ── Form input ── */
-function FormInput({ label, type = "text", value, onChange, S }) {
+function TextAreaField({ label, value, onChange }) {
   return (
-    <div>
-      <label style={{ display: "block", marginBottom: 8, fontFamily: S.mono, fontSize: 11,
-        color: S.accent, letterSpacing: "0.18em", textTransform: "uppercase" }}>{label}</label>
-      <input type={type} value={value} placeholder={label}
-        onChange={(e) => onChange(e.target.value)}
-        onFocus={(e) => (e.target.style.borderColor = "rgba(100,255,218,0.45)")}
-        onBlur={(e)  => (e.target.style.borderColor = "rgba(100,255,218,0.12)")}
-        style={{ width: "100%", background: "rgba(255,255,255,0.025)",
-          border: "1px solid rgba(100,255,218,0.12)", borderRadius: 6,
-          padding: "11px 14px", fontSize: 14, color: S.textPri,
-          fontFamily: S.sans, outline: "none", transition: "border-color 200ms",
-          boxSizing: "border-box" }} />
-    </div>
+    <label className="field">
+      <span>{label}</span>
+      <textarea
+        rows="5"
+        value={value}
+        onChange={(event) => onChange(event.target.value)}
+        placeholder="Tell me about your project"
+        required
+      />
+    </label>
+  );
+}
+
+function SocialLink({ href, label, children }) {
+  return (
+    <a className="social-link" href={href} target="_blank" rel="noreferrer" aria-label={label}>
+      {children}
+    </a>
+  );
+}
+
+function ArrowIcon() {
+  return (
+    <svg viewBox="0 0 24 24" aria-hidden="true">
+      <path
+        d="M5 12h12m0 0l-4-4m4 4l-4 4"
+        fill="none"
+        stroke="currentColor"
+        strokeWidth="1.5"
+        strokeLinecap="round"
+        strokeLinejoin="round"
+      />
+    </svg>
+  );
+}
+
+function DownloadIcon() {
+  return (
+    <svg viewBox="0 0 24 24" aria-hidden="true">
+      <path
+        d="M12 3v12m0 0l4-4m-4 4l-4-4M4 19h16"
+        fill="none"
+        stroke="currentColor"
+        strokeWidth="1.5"
+        strokeLinecap="round"
+        strokeLinejoin="round"
+      />
+    </svg>
+  );
+}
+
+function ExternalIcon() {
+  return (
+    <svg viewBox="0 0 24 24" aria-hidden="true">
+      <path
+        d="M14 3h7v7m0-7L10 14m-1 7H5a2 2 0 0 1-2-2V9"
+        fill="none"
+        stroke="currentColor"
+        strokeWidth="1.5"
+        strokeLinecap="round"
+        strokeLinejoin="round"
+      />
+    </svg>
+  );
+}
+
+function GithubIcon() {
+  return (
+    <svg viewBox="0 0 24 24" aria-hidden="true">
+      <path
+        d="M9 19c-4 1.5-4-2.5-6-3m12 6v-3.5a3.2 3.2 0 0 0-.9-2.5c3-.3 6-1.5 6-6.3A4.8 4.8 0 0 0 18 4.7 4.5 4.5 0 0 0 17.9 1S16.6.6 14 2.4a11.2 11.2 0 0 0-6 0C5.4.6 4.1 1 4.1 1a4.5 4.5 0 0 0-.1 3.7A4.8 4.8 0 0 0 2.5 9c0 4.8 3 6 6 6.3a3.2 3.2 0 0 0-.8 2.2V22"
+        fill="none"
+        stroke="currentColor"
+        strokeWidth="1.5"
+        strokeLinecap="round"
+        strokeLinejoin="round"
+      />
+    </svg>
+  );
+}
+
+function LinkedinIcon() {
+  return (
+    <svg viewBox="0 0 24 24" aria-hidden="true">
+      <path
+        d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"
+        fill="none"
+        stroke="currentColor"
+        strokeWidth="1.5"
+        strokeLinecap="round"
+        strokeLinejoin="round"
+      />
+      <rect x="2" y="9" width="4" height="12" />
+      <circle cx="4" cy="4" r="2" />
+    </svg>
+  );
+}
+
+function MailIcon() {
+  return (
+    <svg viewBox="0 0 24 24" aria-hidden="true">
+      <path
+        d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"
+        fill="none"
+        stroke="currentColor"
+        strokeWidth="1.5"
+        strokeLinecap="round"
+        strokeLinejoin="round"
+      />
+      <polyline
+        points="22,6 12,13 2,6"
+        fill="none"
+        stroke="currentColor"
+        strokeWidth="1.5"
+        strokeLinecap="round"
+        strokeLinejoin="round"
+      />
+    </svg>
   );
 }
