@@ -153,7 +153,39 @@ const DATA = {
   },
 };
 
-const NAV = ["About", "Experience", "Projects", "Certifications", "Contact"];
+const NAV = ["About", "Experience", "Projects", "Technologies", "Certifications", "Contact"];
+
+/* ══════════════  TECHNOLOGIES DATA  ══════════════ */
+const TECH_CATEGORIES = [
+  {
+    label: "Languages",
+    items: ["Python", "JavaScript", "TypeScript", "Java", "C++", "SQL", "Bash"],
+  },
+  {
+    label: "Frontend",
+    items: ["React.js", "Next.js", "HTML5", "CSS3", "Tailwind CSS", "Bootstrap", "Vite"],
+  },
+  {
+    label: "Backend & Runtime",
+    items: ["Node.js", "Express.js", "Flask", "FastAPI", "REST APIs", "GraphQL"],
+  },
+  {
+    label: "Machine Learning",
+    items: ["TensorFlow", "PyTorch", "scikit-learn", "Pandas", "NumPy", "Jupyter"],
+  },
+  {
+    label: "Databases & ORMs",
+    items: ["PostgreSQL", "MongoDB", "Supabase", "Redis", "MySQL", "SQLAlchemy"],
+  },
+  {
+    label: "Tools & DevOps",
+    items: ["Docker", "Git", "CI/CD", "n8n", "Linux/Unix", "Nginx", "Webpack"],
+  },
+  {
+    label: "Cloud & Hosting",
+    items: ["Google Cloud Platform", "AWS", "Azure", "Netlify", "Heroku", "Render", "DigitalOcean", "Vercel"],
+  },
+];
 
 /* ══════════════  ICONS  ══════════════ */
 const GithubIcon = ({ size = 20 }) => (
@@ -243,7 +275,14 @@ export default function Portfolio() {
   };
 
   return (
-    <div style={{ backgroundColor: S.bg, color: S.textSec, fontFamily: S.sans, minHeight: "100vh", overflowX: "hidden" }}>
+    <div style={{ backgroundColor: S.bg, color: S.textSec, fontFamily: S.sans, minHeight: "100vh", overflowX: "hidden", position: "relative" }}>
+
+      {/* ── Animated background waves ── */}
+      <div aria-hidden="true" style={{ position: "fixed", inset: 0, zIndex: 0, overflow: "hidden", pointerEvents: "none" }}>
+        <div className="wave wave1" />
+        <div className="wave wave2" />
+        <div className="wave wave3" />
+      </div>
 
       {/* Cursor spotlight */}
       <div className="pointer-events-none fixed inset-0 z-20"
@@ -275,7 +314,7 @@ export default function Portfolio() {
         )}
       </header>
 
-      <div className="mx-auto max-w-screen-xl px-6 md:px-12 lg:px-20 xl:px-24 lg:flex lg:gap-10 xl:gap-16">
+      <div className="mx-auto max-w-screen-xl px-6 md:px-12 lg:px-20 xl:px-24 lg:flex lg:gap-10 xl:gap-16" style={{ position: "relative", zIndex: 1 }}>
 
         {/* ════  SIDEBAR  ════ */}
         <aside className="hidden lg:flex lg:flex-col lg:justify-between lg:sticky lg:top-0 lg:h-screen lg:w-[42%] lg:shrink-0 lg:py-24">
@@ -394,9 +433,15 @@ export default function Portfolio() {
             </div>
           </section>
 
+          {/* TECHNOLOGIES */}
+          <section id="technologies" ref={(el) => (refs.current["technologies"] = el)}>
+            <MobileHeading num="04">Technologies</MobileHeading>
+            <TechSection S={S} />
+          </section>
+
           {/* CERTIFICATIONS */}
           <section id="certifications" ref={(el) => (refs.current["certifications"] = el)}>
-            <MobileHeading num="04">Certifications</MobileHeading>
+            <MobileHeading num="05">Certifications</MobileHeading>
             <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fill,minmax(220px,1fr))", gap: 12 }}>
               {DATA.certifications.map((cert, i) => <CertCard key={i} cert={cert} S={S} />)}
             </div>
@@ -404,7 +449,7 @@ export default function Portfolio() {
 
           {/* CONTACT */}
           <section id="contact" ref={(el) => (refs.current["contact"] = el)}>
-            <MobileHeading num="05">Contact</MobileHeading>
+            <MobileHeading num="06">Contact</MobileHeading>
             <p style={{ lineHeight: 1.72, fontSize: 15, maxWidth: 480, marginBottom: 32 }}>
               I'm currently open to new opportunities. Whether it's a project, a question, or just want to say hello — my inbox is always open.
             </p>
@@ -605,6 +650,106 @@ function CertCard({ cert, S }) {
         <p style={{ fontSize: 12, color: S.textMute, fontFamily: S.mono }}>{cert.issuer}</p>
       </div>
     </a>
+  );
+}
+
+/* ── Technologies section with category tabs ── */
+function TechSection({ S }) {
+  const [activeTab, setActiveTab] = useState("All");
+  const allItems = TECH_CATEGORIES.flatMap((c) => c.items.map((item) => ({ item, category: c.label })));
+  const tabs = ["All", ...TECH_CATEGORIES.map((c) => c.label)];
+
+  const filtered =
+    activeTab === "All"
+      ? allItems
+      : allItems.filter((x) => x.category === activeTab);
+
+  return (
+    <div>
+      {/* Tab chips */}
+      <div role="tablist" aria-label="Technology categories"
+        style={{ display: "flex", flexWrap: "wrap", gap: 10, marginBottom: 28 }}>
+        {tabs.map((tab) => {
+          const active = tab === activeTab;
+          return (
+            <button
+              key={tab}
+              role="tab"
+              aria-selected={active}
+              onClick={() => setActiveTab(tab)}
+              style={{
+                padding: "6px 16px",
+                borderRadius: 99,
+                border: `1px solid ${active ? S.accent : "rgba(100,255,218,0.2)"}`,
+                background: active ? "rgba(100,255,218,0.1)" : "transparent",
+                color: active ? S.accent : S.textMute,
+                fontFamily: S.mono,
+                fontSize: 11.5,
+                letterSpacing: "0.06em",
+                cursor: "pointer",
+                transition: "all 200ms",
+              }}
+            >
+              {tab}
+            </button>
+          );
+        })}
+      </div>
+
+      {/* Tech chips grid */}
+      {activeTab === "All" ? (
+        <div style={{ display: "flex", flexDirection: "column", gap: 24 }}>
+          {TECH_CATEGORIES.map((cat) => (
+            <div key={cat.label}>
+              <p style={{ fontFamily: S.mono, fontSize: 11, color: S.accent,
+                letterSpacing: "0.18em", textTransform: "uppercase", marginBottom: 12 }}>
+                {cat.label}
+              </p>
+              <div style={{ display: "flex", flexWrap: "wrap", gap: 8 }}>
+                {cat.items.map((item) => (
+                  <TechChip key={item} label={item} S={S} />
+                ))}
+              </div>
+            </div>
+          ))}
+        </div>
+      ) : (
+        <div style={{ display: "flex", flexWrap: "wrap", gap: 10 }}>
+          {filtered.map(({ item }) => (
+            <TechChip key={item} label={item} S={S} large />
+          ))}
+        </div>
+      )}
+    </div>
+  );
+}
+
+function TechChip({ label, S, large }) {
+  const [hov, setHov] = useState(false);
+  return (
+    <span
+      onMouseEnter={() => setHov(true)}
+      onMouseLeave={() => setHov(false)}
+      style={{
+        display: "inline-flex",
+        alignItems: "center",
+        gap: 6,
+        padding: large ? "8px 18px" : "5px 14px",
+        borderRadius: 99,
+        border: `1px solid ${hov ? S.accent : "rgba(100,255,218,0.15)"}`,
+        background: hov ? "rgba(100,255,218,0.08)" : "rgba(255,255,255,0.025)",
+        color: hov ? S.accent : S.textSec,
+        fontFamily: S.mono,
+        fontSize: large ? 13 : 12,
+        letterSpacing: "0.04em",
+        transition: "all 180ms",
+        cursor: "default",
+        userSelect: "none",
+      }}
+    >
+      <span style={{ color: S.accent, fontSize: 9 }}>▹</span>
+      {label}
+    </span>
   );
 }
 
